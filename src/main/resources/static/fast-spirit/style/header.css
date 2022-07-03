@@ -1,0 +1,25 @@
+.header {
+    display: flex;
+    padding: 0px;
+    padding-left: 15px;
+    align-items: center;
+    border-bottom: var(--border) 2px solid;
+}
+.header img {
+    width: auto;
+    height: 36px;
+    padding-right: 10px;
+}
+.header .title {
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+.header .empty {
+    flex: 1;
+}
+.header .version {
+    margin-right: 15px;
+    padding: 5px;
+    background: var(--background-active);
+}

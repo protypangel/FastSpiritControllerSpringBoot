@@ -1,0 +1,63 @@
+.controllers {
+    display: flex;
+    height: 100%;
+}
+.controllers .tree {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    overflow-y: auto;
+}
+.controllers .tree::-webkit-scrollbar-thumb {
+    background-color: red;
+}
+.controllers .tree::-webkit-scrollbar-thumb, .controllers .tree::-webkit-scrollbar-track {
+    background-clip: padding-box;
+    border: 3px solid transparent;
+    border-radius: 100px;
+}
+.controllers .tree .title {
+    display: flex;
+    padding-right: 20px;
+    align-items: center;
+    cursor: pointer;
+}
+.controllers .tree .title p {
+    padding: 0px;
+    margin: 0px;
+    font-weight: bold;
+}
+.controllers .content {
+    flex: 1;
+    background: #353535;
+}
+.controllers .tree .content {
+    display: flex;
+    flex-direction: column;
+    flex: 0 auto;
+    height: 0;
+}
+.controllers .tree .method {
+    cursor: pointer;
+}
+.controllers .tree .method td {
+    font-size: 13px;
+    font-family: monospace;
+}
+.controllers .tree .method td:first-child {
+    text-align: right;
+    padding: 0px 15px;
+}
+.controllers .tree .method tr {
+    padding-bottom: 5px;
+}
+.controllers .tree .method td:last-child {
+    padding: 0px;
+    padding-right: 15px;
+}
+.controllers .tree table {
+    border-collapse: collapse;
+}
+.controllers .tree .title:hover, .controllers .tree tr:hover {
+    background: var(--background-hover);
+}

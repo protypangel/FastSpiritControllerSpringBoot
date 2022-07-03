@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" type="image/png" th:href="${config.api.logoUrl}" sizes="48x48">
+    <link rel="stylesheet" type="text/css" th:href="@{/fast-spirit/style/header.css}"/>
+</head>
+<body>
+    <div class="header">
+        <img th:src="${config.api.logoUrl}" width="auto" height="24px"/>
+        <p class="title" th:text="${config.api.title}"/>
+        <p class="empty"/>
+        <p class="version"  th:text="${config.api.version}"/>
+    </div>
+</body>
+</html>

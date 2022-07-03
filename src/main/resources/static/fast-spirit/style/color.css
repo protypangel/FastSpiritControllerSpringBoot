@@ -1,0 +1,8 @@
+body {
+    --border: #d0d0d0;
+    --border-active: #ff6c37;
+    --background-normal: #232323;
+    --background-active: #565656;
+    --background-hover: #494949;
+    --color: #d0d0d0;
+}

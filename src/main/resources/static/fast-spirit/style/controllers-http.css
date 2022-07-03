@@ -1,0 +1,24 @@
+.GET {
+    color: #3caab5;
+}
+.POST {
+    color: #78bc61;
+}
+.DELETE {
+    color: #ed6a5a;
+}
+.PUT {
+    color: #e6c229;
+}
+.PATCH {
+    color: #645dad;
+}
+.TRACE {
+    color: #666444;
+}
+.HEAD {
+    color: #798eb3;
+}
+.OPTIONS {
+    color: #ff8a2c;
+}

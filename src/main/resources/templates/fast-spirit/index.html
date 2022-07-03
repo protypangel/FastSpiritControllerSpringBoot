@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title th:text="${config.api.title}"></title>
+        <link rel="stylesheet" type="text/css" th:href="@{/fast-spirit/style/style.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/fast-spirit/style/color.css}"/>
+        <th:block th:insert="~{fast-spirit/controllers :: head}"/>
+        <th:block th:insert="~{fast-spirit/header :: head}"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="http://localhost:35729/livereload.js"></script>
+        <script>
+            function updateControllers (username, password) {
+                $.ajax({
+                    url: '[[${controllers}]]',
+                    type: 'GET',
+                    headers: {
+                        'username': username,
+                        'password': password
+                    },
+                    success: function(fragment) {
+                        $("#controllers").replaceWith(fragment)
+                    }
+                })
+            }
+            updateControllers("ADMIN", "ADMIN")
+        </script>
+    </head>
+    <body>
+        <div th:insert="~{fast-spirit/header  :: body}"/>
+        <div id="center">
+            <div id="left">
+                <div class="content active" id="doc">
+                    <svg fill="var(--color)">
+                        <use th:href="@{/fast-spirit/svg/file.svg} + '#svg'"></use>
+                    </svg>
+                    <p>API</p>
+                </div>
+            </div>
+            <div id="right">
+                <div id="controllers"/>
+            </div>
+        </div>
+    </body>
+</html>

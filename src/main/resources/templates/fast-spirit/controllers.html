@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/fast-spirit/style/controllers-http.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/fast-spirit/style/controllers.css}"/>
+</head>
+<body>
+    <div class="controllers">
+        <div class="tree">
+            <div th:each="controller: ${controllers}" class="controller">
+                <div class="title">
+                    <svg fill="var(--color)">
+                        <use th:href="@{/fast-spirit/svg/chevron-down.svg} + '#svg'"></use>
+                    </svg>
+                    <p th:text="${controller.title}"/>
+                </div>
+                <table class="content">
+                        <div th:each="mapping: ${controller.mappings}">
+                            <div th:each="httpMethod: ${mapping.httpMethods}">
+                                <tr th:each="path: ${mapping.paths}" class="method">
+                                    <td th:text="${httpMethod}" th:class="${httpMethod}"/>
+                                    <td th:text="${mapping.title}"/>
+                                </tr>
+                                <tr th:each="path: ${mapping.paths}" class="method">
+                                    <td th:text="${httpMethod}" th:class="${httpMethod}"/>
+                                    <td th:text="${mapping.title}"/>
+                                </tr>
+                            </div>
+                        </div>
+                </table>
+            </div>
+        </div>
+        <div class="content">
+
+        </div>
+    </div>
+</body>
+</html>

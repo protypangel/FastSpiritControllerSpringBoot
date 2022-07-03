@@ -1,0 +1,55 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    height: 100vh;
+    min-height: 100%;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    user-select: none;
+    background: var(--background-normal);
+    color: var(--color);
+}
+svg {
+    width: 24px;
+    height: 24px;
+}
+#center {
+    flex: 1;
+    display: flex;
+}
+#left .content p {
+    margin: 0;
+    font-family: monospace;
+    font-size: 16px;
+}
+#left {
+    width: 100px;
+    height: 100%;
+    border-right: var(--border) 2px solid;
+}
+#left .content {
+    display: flex;
+    padding: 10px 0;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+}
+
+#left .content.active, #left .content.active * {
+    background: var(--background-active);
+}
+#left .content.active {
+    border-left: var(--border-active) 2px solid;
+}
+#left .content:hover, #left .content:hover * {
+    background: var(--background-hover);
+}
+#left .content img {
+    width: 48px;
+}
+#right {
+    flex: 1;
+    height: 100%;
+}
