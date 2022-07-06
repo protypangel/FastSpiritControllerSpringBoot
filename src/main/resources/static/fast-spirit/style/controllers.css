@@ -1,63 +1,63 @@
-.controllers {
+#right #API {
     display: flex;
     height: 100%;
 }
-.controllers .tree {
+#right #API .tree {
     display: flex;
     flex-direction: column;
     color: white;
     overflow-y: auto;
 }
-.controllers .tree::-webkit-scrollbar-thumb {
+#right #API .tree::-webkit-scrollbar-thumb {
     background-color: red;
 }
-.controllers .tree::-webkit-scrollbar-thumb, .controllers .tree::-webkit-scrollbar-track {
+#right #API .tree::-webkit-scrollbar-thumb, #right #API .tree::-webkit-scrollbar-track {
     background-clip: padding-box;
     border: 3px solid transparent;
     border-radius: 100px;
 }
-.controllers .tree .title {
+#right #API .tree .title {
     display: flex;
     padding-right: 20px;
     align-items: center;
     cursor: pointer;
 }
-.controllers .tree .title p {
+#right #API .tree .title p {
     padding: 0px;
     margin: 0px;
     font-weight: bold;
 }
-.controllers .content {
+#right #API .content {
     flex: 1;
     background: #353535;
 }
-.controllers .tree .content {
+#right #API .tree .content {
     display: flex;
     flex-direction: column;
     flex: 0 auto;
     height: 0;
 }
-.controllers .tree .method {
+#right #API .tree .method {
     cursor: pointer;
 }
-.controllers .tree .method td {
+#right #API .tree .method td {
     font-size: 13px;
     font-family: monospace;
 }
-.controllers .tree .method td:first-child {
+#right #API .tree .method td:first-child {
     text-align: right;
     padding: 0px 15px;
 }
-.controllers .tree .method tr {
+#right #API .tree .method tr {
     padding-bottom: 5px;
 }
-.controllers .tree .method td:last-child {
+#right #API .tree .method td:last-child {
     padding: 0px;
     padding-right: 15px;
 }
-.controllers .tree table {
+#right #API .tree table {
     border-collapse: collapse;
 }
-.controllers .tree .title:hover, .controllers .tree tr:hover {
+#right #API .tree .title:hover, #right #API .tree tr:hover {
     background: var(--background-hover);
 }

@@ -6,40 +6,32 @@
         <link rel="stylesheet" type="text/css" th:href="@{/fast-spirit/style/style.css}"/>
         <link rel="stylesheet" type="text/css" th:href="@{/fast-spirit/style/color.css}"/>
         <th:block th:insert="~{fast-spirit/controllers :: head}"/>
+        <th:block th:insert="~{fast-spirit/login :: head}"/>
         <th:block th:insert="~{fast-spirit/header :: head}"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="http://localhost:35729/livereload.js"></script>
-        <script>
-            function updateControllers (username, password) {
-                $.ajax({
-                    url: '[[${controllers}]]',
-                    type: 'GET',
-                    headers: {
-                        'username': username,
-                        'password': password
-                    },
-                    success: function(fragment) {
-                        $("#controllers").replaceWith(fragment)
-                    }
-                })
-            }
-            updateControllers("ADMIN", "ADMIN")
-        </script>
+        <script th:inline="javascript">const FastSpirit_CONTROLLER_URL = [[${controller}]]</script>
     </head>
     <body>
         <div th:insert="~{fast-spirit/header  :: body}"/>
         <div id="center">
             <div id="left">
-                <div class="content active" id="doc">
-                    <svg fill="var(--color)">
-                        <use th:href="@{/fast-spirit/svg/file.svg} + '#svg'"></use>
-                    </svg>
-                    <p>API</p>
+                <div th:with="menus = ${ {'API', 'LOGIN'} }">
+                    <div th:each="menu, iter: ${menus}"
+                         th:class="${iter.index} == 0 ? 'content active' : 'content'" th:id="${menu}"
+                         onclick="FastSpirit.Menu(this)">
+                        <svg fill="var(--color)">
+                            <use th:with="link='/fast-spirit/svg/' + ${menu} + '.svg#svg'" th:href="${link}"></use>
+                        </svg>
+                        <p th:text="${menu}"/>
+                    </div>
                 </div>
             </div>
             <div id="right">
-                <div id="controllers"/>
+                <div th:replace="~{fast-spirit/controllers :: body}"/>
+                <div th:replace="~{fast-spirit/login :: body}"/>
             </div>
         </div>
+        <script th:src="@{/fast-spirit/script/script.js}"></script>
     </body>
 </html>

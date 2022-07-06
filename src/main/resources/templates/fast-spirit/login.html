@@ -1,8 +1,31 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <script th:src="@{/common/script.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/fast-spirit/style/login.css}"/>
 </head>
 <body>
-</body>
+    <div id="LOGIN">
+        <div id="disconnected">
+            <div class="content">
+                <div class="input">
+                    <svg fill="var(--color)">
+                        <use th:href="@{/fast-spirit/svg/username.svg#svg}"></use>
+                    </svg>
+                    <input type="text" placeholder="Username" id="disconnected_username"/>
+                </div>
+                <div class="input">
+                    <svg fill="var(--color)">
+                        <use th:href="@{/fast-spirit/svg/password.svg#svg}"></use>
+                    </svg>
+                    <input type="password" placeholder="Password" id="disconnected_password"/>
+                </div>
+                <div class="button" onclick="FastSpirit.Login()">LOGIN</div>
+            </div>
+        </div>
+        <div id="connected">
+            <div id="username"></div>
+            <div class="button" onclick="FastSpirit.Login()">DISCONNECTION</div>
+        </div>
+    </div>
+    </body>
 </html>
