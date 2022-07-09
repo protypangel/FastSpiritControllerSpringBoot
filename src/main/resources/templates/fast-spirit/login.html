@@ -19,12 +19,19 @@
                     </svg>
                     <input type="password" placeholder="Password" id="disconnected_password"/>
                 </div>
-                <div class="button" onclick="FastSpirit.Login()">LOGIN</div>
+                <div class="button">LOGIN</div>
             </div>
         </div>
         <div id="connected">
-            <div id="username"></div>
-            <div class="button" onclick="FastSpirit.Login()">DISCONNECTION</div>
+            <div class="content">
+                <div class="input">
+                    <svg fill="var(--color)">
+                        <use th:href="@{/fast-spirit/svg/username.svg#svg}"></use>
+                    </svg>
+                    <div id="username"></div>
+                </div>
+                <div class="button">LOGOUT</div>
+            </div>
         </div>
     </div>
     </body>

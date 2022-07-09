@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <title th:text="${config.api.title}"></title>
+        <link rel="icon" type="image/png" th:href="${config.api.logoUrl}">
         <link rel="stylesheet" type="text/css" th:href="@{/fast-spirit/style/style.css}"/>
         <link rel="stylesheet" type="text/css" th:href="@{/fast-spirit/style/color.css}"/>
         <th:block th:insert="~{fast-spirit/controllers :: head}"/>
@@ -18,8 +19,7 @@
             <div id="left">
                 <div th:with="menus = ${ {'API', 'LOGIN'} }">
                     <div th:each="menu, iter: ${menus}"
-                         th:class="${iter.index} == 0 ? 'content active' : 'content'" th:id="${menu}"
-                         onclick="FastSpirit.Menu(this)">
+                         th:class="${iter.index} == 0 ? 'content active' : 'content'" th:id="${menu}">
                         <svg fill="var(--color)">
                             <use th:with="link='/fast-spirit/svg/' + ${menu} + '.svg#svg'" th:href="${link}"></use>
                         </svg>

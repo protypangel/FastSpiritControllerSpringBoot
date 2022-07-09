@@ -14,24 +14,24 @@
                     </svg>
                     <p th:text="${controller.title}"/>
                 </div>
-                <table class="content">
-                        <div th:each="mapping: ${controller.mappings}">
-                            <div th:each="httpMethod: ${mapping.httpMethods}">
-                                <tr th:each="path: ${mapping.paths}" class="method">
-                                    <td th:text="${httpMethod}" th:class="${httpMethod}"/>
-                                    <td th:text="${mapping.title}"/>
-                                </tr>
-                                <tr th:each="path: ${mapping.paths}" class="method">
-                                    <td th:text="${httpMethod}" th:class="${httpMethod}"/>
-                                    <td th:text="${mapping.title}"/>
-                                </tr>
-                            </div>
-                        </div>
-                </table>
+                <div class="content">
+                    <div th:each="mapping: ${controller.mappings}" class="method">
+                        <td th:text="${mapping.title}"/>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="content">
-
+        <div class="content" th:with="mapping = ${controllers.size} == 0 ? null : (${controllers[0].mappings.size} == 0 ? null : ${controllers[0].mappings[0]})">
+            <div class="top">
+                <select name="httpMethods" class="httpMethods" onchange="FastSpirit.requestHeader(this)">
+                    <option th:each="httpMethod: ${mapping.httpMethods}" th:value="${httpMethod}" th:text="${httpMethod}"  th:class="${httpMethod}"></option>
+                </select>
+                <select name="paths" class="paths">
+                    <option th:each="path: ${mapping.paths}" th:value="${path}" th:text="${path}"></option>
+                </select>
+                <div class="blank"></div>
+                <div class="button">TRY IT</div>
+            </div>
         </div>
     </div>
 </body>

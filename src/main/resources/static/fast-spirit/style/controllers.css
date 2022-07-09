@@ -8,13 +8,16 @@
     color: white;
     overflow-y: auto;
 }
-#right #API .tree::-webkit-scrollbar-thumb {
-    background-color: red;
+#right #API .tree::-webkit-scrollbar {
+    width: 12px;
 }
-#right #API .tree::-webkit-scrollbar-thumb, #right #API .tree::-webkit-scrollbar-track {
-    background-clip: padding-box;
-    border: 3px solid transparent;
-    border-radius: 100px;
+#right #API .tree::-webkit-scrollbar-track{
+    background: var(--background-normal);
+}
+#right #API .tree::-webkit-scrollbar-thumb {
+  background-color: var(--background-active);
+  border-radius: 20px;
+  border: 3px solid var(--background-normal);
 }
 #right #API .tree .title {
     display: flex;
@@ -29,7 +32,7 @@
 }
 #right #API .content {
     flex: 1;
-    background: #353535;
+    background: var(--background-content-controllers);
 }
 #right #API .tree .content {
     display: flex;
@@ -39,25 +42,39 @@
 }
 #right #API .tree .method {
     cursor: pointer;
-}
-#right #API .tree .method td {
+    padding: 0;
+    padding-left: 30px;
     font-size: 13px;
     font-family: monospace;
 }
-#right #API .tree .method td:first-child {
-    text-align: right;
-    padding: 0px 15px;
-}
-#right #API .tree .method tr {
-    padding-bottom: 5px;
-}
-#right #API .tree .method td:last-child {
-    padding: 0px;
-    padding-right: 15px;
-}
-#right #API .tree table {
-    border-collapse: collapse;
-}
-#right #API .tree .title:hover, #right #API .tree tr:hover {
+#right #API .tree .method:hover, #right #API .tree .title:hover {
     background: var(--background-hover);
+}
+#right #API .content .top {
+    display: flex;
+    margin: 25px 25px 0px 25px;
+}
+#right #API .content .top .blank {
+}
+#right #API .content .top .button {
+    padding: 5px 25px;
+    background: var(--background-active);
+    border: 2px solid var(--color-http);
+}
+#right #API .content .top select {
+    margin-right: 10px;
+    text-align: center;
+    border: 0;
+    outline: 0;
+    -webkit-appearance: none;
+    border: 2px solid var(--color-http);
+    color: var(--color);
+    min-width: 100px;
+    background: var(--background-active);
+}
+#right #API .content .top option {
+    color: var(--color-http);
+}
+#right #API .content .top .paths {
+    flex: 1;
 }

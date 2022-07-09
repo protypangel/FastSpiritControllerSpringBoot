@@ -4,5 +4,6 @@ body {
     --background-normal: #232323;
     --background-active: #565656;
     --background-hover: #494949;
+    --background-content-controllers: #353535;
     --color: #d0d0d0;
 }

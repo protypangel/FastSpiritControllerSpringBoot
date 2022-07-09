@@ -11,7 +11,7 @@
 #right #LOGIN > div .content {
     width: fit-content;
     padding: 25px;
-    background: red;
+    background: var(--background-active);
     transform: translate(-50%,-50%);
     top: 50%;
     position: absolute;
@@ -21,6 +21,13 @@
     cursor: pointer;
     text-align: center;
     margin-top:20px;
-    padding: 5px 0px;
+    padding: 5px 15px;
     background: var(--background-normal);
+}
+#right #LOGIN > div .content .input {
+    display: flex;
+    align-items: flex-end;
+}
+#right #LOGIN #username {
+    padding-left: 5px;
 }
