@@ -17,6 +17,10 @@
 }
 .header .empty {
     flex: 1;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: monospace;
 }
 .header .version {
     margin-right: 15px;

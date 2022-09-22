@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 
 @Getter
 @JsonView(View.Public.class)
-@ToString
 public class FastSpiritJsonController {
   private String title = "";
   private List<FastSpiritJsonMapping> mappings = new ArrayList<>();

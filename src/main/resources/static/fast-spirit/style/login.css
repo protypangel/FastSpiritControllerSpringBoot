@@ -1,12 +1,8 @@
-#right #LOGIN {
-    display: flex;
-    width: 100%;
-    height: 100%;
-}
 #right #LOGIN > div {
     width: 100%;
     height: 100%;
     position: absolute;
+    display: flex;
 }
 #right #LOGIN > div .content {
     width: fit-content;
@@ -16,6 +12,15 @@
     top: 50%;
     position: absolute;
     left: 50%;
+}
+#right #LOGIN #disconnected .alert {
+  animation: shake 0.5s linear 1;
+  transform: translate3d(-50%,-50%, 0);
+  backface-visibility: hidden;
+}
+#right #LOGIN > div .alert .button {
+    background: var(--border-active) !important;
+    color: var(--background-normal) !important;
 }
 #right #LOGIN > div .content .button {
     cursor: pointer;
@@ -30,4 +35,21 @@
 }
 #right #LOGIN #username {
     padding-left: 5px;
+}
+@keyframes shake {
+    10%, 90% {
+      transform: translate3d(-51%, -50%, 0);
+    }
+
+    20%, 80% {
+        transform: translate3d(-49%, -50%, 0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-51%, -50% 0);
+    }
+
+    40%, 60% {
+        transform: translate3d(-49%, -50%, 0);
+    }
 }

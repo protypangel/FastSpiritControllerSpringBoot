@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.TYPE})
-@FastSpiritCustomAuthorization(privileges = @FastSpiritRoleAccess("ACCESS"))
+@FastSpiritCustomAuthorization(roles = @FastSpiritRoleAccess("ADMIN"), privileges = @FastSpiritRoleAccess("ACCESS"))
 public @interface ADMIN {
 }

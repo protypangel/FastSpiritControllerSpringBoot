@@ -6,12 +6,15 @@
         <link rel="icon" type="image/png" th:href="${config.api.logoUrl}">
         <link rel="stylesheet" type="text/css" th:href="@{/fast-spirit/style/style.css}"/>
         <link rel="stylesheet" type="text/css" th:href="@{/fast-spirit/style/color.css}"/>
-        <th:block th:insert="~{fast-spirit/controllers :: head}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/fast-spirit/style/controllers-http.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/fast-spirit/style/controllers.css}"/>
+
         <th:block th:insert="~{fast-spirit/login :: head}"/>
         <th:block th:insert="~{fast-spirit/header :: head}"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="http://localhost:35729/livereload.js"></script>
-        <script th:inline="javascript">const FastSpirit_CONTROLLER_URL = [[${controller}]]</script>
+        <script th:src="@{/fast-spirit/script/script.js}"></script>
+
     </head>
     <body>
         <div th:insert="~{fast-spirit/header  :: body}"/>
@@ -28,10 +31,15 @@
                 </div>
             </div>
             <div id="right">
-                <div th:replace="~{fast-spirit/controllers :: body}"/>
+                <div id="API" class="active"></div>
                 <div th:replace="~{fast-spirit/login :: body}"/>
             </div>
         </div>
-        <script th:src="@{/fast-spirit/script/script.js}"></script>
+        <script th:inline="javascript">
+            FastSpirit.init = {
+                CONTROLLER_AUTHORITY: [[${controller_authority}]],
+                CONTROLLER_EMPTY: [[${controller_empty}]]
+            }
+        </script>
     </body>
 </html>

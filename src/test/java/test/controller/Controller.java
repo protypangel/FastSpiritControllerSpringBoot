@@ -42,6 +42,7 @@ public class Controller {
   }
 
   @FastSpiritMapping(
+      description = "toto",
       responses = {
           @FastSpiritResponse(
                   code = 200,

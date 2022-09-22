@@ -61,18 +61,16 @@ public class FastSpiritJsonBuilder {
     securities.addAll(controller.security());
   }
 
-  public List<FastSpiritJsonController> authority(String username, String password) {
-    try {
+  public List<FastSpiritJsonController> authority(String username, String password) throws UsernameNotFoundException {
       if (username == null && password == null) throw new UsernameNotFoundException("Principal null");
       UserDetails user = service.loadUserByUsername(username);
       if (!user.getPassword().equals(password)) throw new UsernameNotFoundException("Password not compatible");
-      final Stream<String> authorities = service.loadUserByUsername(username).getAuthorities().stream().map(GrantedAuthority::getAuthority);
-      return this.controllers.stream().map(FastSpiritJsonController::clone).filter(FastSpiritJsonController::getDisplay).map(controller -> controller.filter(authorities.collect(Collectors.toList()))).collect(Collectors.toList());
-    } catch (UsernameNotFoundException exception) {
-      return this.controllers.stream().map(FastSpiritJsonController::clone).filter(FastSpiritJsonController::getDisplay).map(FastSpiritJsonController::filter).collect(Collectors.toList());
-    }
+      final List<String> authorities = service.loadUserByUsername(username).getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+      return this.controllers.stream().map(FastSpiritJsonController::clone).filter(FastSpiritJsonController::getDisplay).map(controller -> controller.filter(authorities)).collect(Collectors.toList());
   }
-
+  public List<FastSpiritJsonController> emptyAuthority () {
+    return this.controllers.stream().map(FastSpiritJsonController::clone).filter(FastSpiritJsonController::getDisplay).map(FastSpiritJsonController::filter).collect(Collectors.toList());
+  }
   public FastSpiritConfig config () {
     return config;
   }

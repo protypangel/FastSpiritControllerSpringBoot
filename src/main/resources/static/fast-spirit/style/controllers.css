@@ -1,12 +1,10 @@
-#right #API {
-    display: flex;
-    height: 100%;
-}
 #right #API .tree {
+    border-right: 2px solid var(--border);
     display: flex;
     flex-direction: column;
     color: white;
     overflow-y: auto;
+    max-width: 116px;
 }
 #right #API .tree::-webkit-scrollbar {
     width: 12px;
@@ -30,9 +28,11 @@
     margin: 0px;
     font-weight: bold;
 }
-#right #API .content {
+#right #API .doc {
     flex: 1;
     background: var(--background-content-controllers);
+    display: flex;
+    flex-direction: column;
 }
 #right #API .tree .content {
     display: flex;
@@ -50,31 +50,112 @@
 #right #API .tree .method:hover, #right #API .tree .title:hover {
     background: var(--background-hover);
 }
-#right #API .content .top {
+#right #API .doc .top {
+    background: var(--background-normal);
     display: flex;
-    margin: 25px 25px 0px 25px;
+    padding: 25px 25px 15px 25px;
 }
-#right #API .content .top .blank {
-}
-#right #API .content .top .button {
-    padding: 5px 25px;
-    background: var(--background-active);
+#right #API .doc .top .button {
+    padding: 7px 25px;
+    background: var(--color-http);
     border: 2px solid var(--color-http);
+    cursor: pointer;
+    height: fit-content;
+    border-radius: 0px 15px 15px 0px;
+    color: var(--background-normal);
+    font-weight: bold;
+    font-size: 18px;
+    border-left: none;
 }
-#right #API .content .top select {
-    margin-right: 10px;
+#right #API .doc .top p {
+    margin: 0;
+    padding: 0;
+}
+#right #API .doc .top select {
     text-align: center;
-    border: 0;
-    outline: 0;
-    -webkit-appearance: none;
-    border: 2px solid var(--color-http);
     color: var(--color);
     min-width: 100px;
     background: var(--background-active);
+    cursor: pointer;
+    border: solid 4px var(--color-http);
+    outline: none;
+    appearance: none;
+    font-size: 18px;
 }
-#right #API .content .top option {
+#right #API .doc .top option {
+  background-color: var(--background-normal);
+  appearance: none;
+}
+#right #API .doc .top .paths option, #right #API .doc .top .httpMethods option {
+    cursor: pointer;
+}
+#right #API .doc .top .paths option {
+    color: var(--color);
+}
+#right #API .doc .top .httpMethods option {
     color: var(--color-http);
 }
-#right #API .content .top .paths {
+#right #API .doc .top .paths {
     flex: 1;
+    border-left: none;
+    border-right: none;
+}
+#right #API .doc .top .httpMethods {
+    width: 100px;
+    border-radius: 15px 0px 0px 15px;
+}
+#right #API .doc .center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+#right #API .doc .center div:nth-child(n+0) {
+    flex: 1;
+    overflow: auto;
+}
+#right #API .doc .menus {
+    display: flex;
+    background: var(--background-normal);
+}
+#right #API .doc .menus div {
+    border-bottom: 5px solid var(--border);
+}
+#right #API .doc .menus .empty {
+    width:15px;
+}
+#right #API .doc .menus .empty:last-child {
+    flex: 1;
+}
+#right #API .doc .menus div:not(.empty) {
+    cursor: pointer;
+    padding: 0px 10px;
+}
+#right #API .doc .menus .active {
+    border-bottom-color: var(--color-http);
+    font-weight: bold;
+    color: white;
+}
+#right #API .doc .center .content > div {
+    display: none;
+}
+#right #API .doc .center .content .active {
+    display: flex;
+    flex-direction: column;
+}
+#right #API .doc h3 {
+    margin: 0;
+    height: fit-content;
+    margin-left: 15px;
+}
+#right #API .doc .controllersDescription_value {
+    margin: 0;
+    height: fit-content;
+    margin-left: 30px;
+    font-size: 12px;
+}
+#right #API .doc #bottom {
+    border-top: 2px solid var(--border);
+}
+#right #API .doc .center > div:not(.exception):not(.active) {
+    display: none;
 }

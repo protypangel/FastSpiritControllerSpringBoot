@@ -1,38 +1,46 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <link rel="stylesheet" type="text/css" th:href="@{/fast-spirit/style/controllers-http.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/fast-spirit/style/controllers.css}"/>
-</head>
-<body>
-    <div id="API">
-        <div class="tree">
-            <div th:each="controller: ${controllers}" class="controller">
-                <div class="title">
-                    <svg fill="var(--color)">
-                        <use th:href="@{/fast-spirit/svg/chevron-down.svg} + '#svg'"></use>
-                    </svg>
-                    <p th:text="${controller.title}"/>
-                </div>
-                <div class="content">
-                    <div th:each="mapping: ${controller.mappings}" class="method">
-                        <td th:text="${mapping.title}"/>
-                    </div>
-                </div>
-            </div>
+<div class="tree">
+    <div th:each="controller, controllerState: ${controllers}" class="controller">
+        <div class="title">
+            <svg fill="var(--color)">
+                <use href="/fast-spirit/svg/chevron-down.svg#svg"></use>
+            </svg>
+            <p th:text="${controller.title}"/>
         </div>
-        <div class="content" th:with="mapping = ${controllers.size} == 0 ? null : (${controllers[0].mappings.size} == 0 ? null : ${controllers[0].mappings[0]})">
-            <div class="top">
-                <select name="httpMethods" class="httpMethods" onchange="FastSpirit.requestHeader(this)">
-                    <option th:each="httpMethod: ${mapping.httpMethods}" th:value="${httpMethod}" th:text="${httpMethod}"  th:class="${httpMethod}"></option>
-                </select>
-                <select name="paths" class="paths">
-                    <option th:each="path: ${mapping.paths}" th:value="${path}" th:text="${path}"></option>
-                </select>
-                <div class="blank"></div>
-                <div class="button">TRY IT</div>
+        <div class="content">
+            <div th:each="mapping, mappingState: ${controller.mappings}" class="method" th:x="${controllerState.index}" th:y="${mappingState.index}">
+                <td th:text="${mapping.title}"/>
             </div>
         </div>
     </div>
-</body>
-</html>
+</div>
+<div class="doc">
+    <div class="top">
+        <select class="httpMethods"></select>
+        <select class="paths"></select>
+        <div class="button">TRY IT</div>
+    </div>
+    <div class="menus">
+        <div class="empty"></div>
+        <div id="Description">Description</div>
+        <div id="Params">Params & Variables</div>
+        <div id="Headers">Headers</div>
+        <div id="Body">Body</div>
+        <div class="empty"></div>
+    </div>
+    <div class="center">
+        <div id="controllersDescription" link="Description">
+            <div class="description">
+                <h3>Description</h3>
+            </div>
+            <div class="access">
+                <h3>Access</h3>
+            </div>
+        </div>
+        <div id="controllersParams" link="Params"></div>
+        <div id="controllersHeaders" link="Headers"></div>
+        <div id="controllersBody" link="Body"></div>
+        <div id="bottom" class="exception">
+            <h3>Response</h3>
+        </div>
+    </div>
+</div>
