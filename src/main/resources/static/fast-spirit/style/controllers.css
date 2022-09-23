@@ -1,10 +1,11 @@
+/* ARBORESCENCE DES CONTROLLERS */
 #right #API .tree {
     border-right: 2px solid var(--border);
     display: flex;
     flex-direction: column;
     color: white;
     overflow-y: auto;
-    max-width: 116px;
+    width: 150px;
 }
 #right #API .tree::-webkit-scrollbar {
     width: 12px;
@@ -28,13 +29,7 @@
     margin: 0px;
     font-weight: bold;
 }
-#right #API .doc {
-    flex: 1;
-    background: var(--background-content-controllers);
-    display: flex;
-    flex-direction: column;
-}
-#right #API .tree .content {
+#right #API .tree .container {
     display: flex;
     flex-direction: column;
     flex: 0 auto;
@@ -50,12 +45,29 @@
 #right #API .tree .method:hover, #right #API .tree .title:hover {
     background: var(--background-hover);
 }
-#right #API .doc .top {
+/* DOC */
+#right #API .doc {
+    flex: 1;
+    background: var(--background-content-controllers);
+    display: flex;
+    flex-direction: row;
+}
+#right #API .doc .request {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+#right #API .doc .documentation {
+    width: 50px;
+    border-left: 2px solid white;
+}
+/* TOP'S REQUEST */
+#right #API .doc .request .top {
     background: var(--background-normal);
     display: flex;
     padding: 25px 25px 15px 25px;
 }
-#right #API .doc .top .button {
+#right #API .doc .request .top .button {
     padding: 7px 25px;
     background: var(--color-http);
     border: 2px solid var(--color-http);
@@ -67,11 +79,11 @@
     font-size: 18px;
     border-left: none;
 }
-#right #API .doc .top p {
+#right #API .doc .request .top p {
     margin: 0;
     padding: 0;
 }
-#right #API .doc .top select {
+#right #API .doc .request .top select {
     text-align: center;
     color: var(--color);
     min-width: 100px;
@@ -82,80 +94,87 @@
     appearance: none;
     font-size: 18px;
 }
-#right #API .doc .top option {
+#right #API .doc .request .top option {
   background-color: var(--background-normal);
   appearance: none;
 }
-#right #API .doc .top .paths option, #right #API .doc .top .httpMethods option {
+#right #API .doc .request .top .paths option, #right #API .doc .request .top .httpMethods option {
     cursor: pointer;
 }
-#right #API .doc .top .paths option {
+#right #API .doc .request .top .paths option {
     color: var(--color);
 }
-#right #API .doc .top .httpMethods option {
+#right #API .doc .request .top .httpMethods option {
     color: var(--color-http);
 }
-#right #API .doc .top .paths {
+#right #API .doc .request .top .paths {
     flex: 1;
     border-left: none;
     border-right: none;
 }
-#right #API .doc .top .httpMethods {
+#right #API .doc .request .top .httpMethods {
     width: 100px;
     border-radius: 15px 0px 0px 15px;
 }
-#right #API .doc .center {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-#right #API .doc .center div:nth-child(n+0) {
-    flex: 1;
-    overflow: auto;
-}
-#right #API .doc .menus {
+/* HEADER'S REQUEST */
+#right #API .doc .request .header {
     display: flex;
     background: var(--background-normal);
 }
-#right #API .doc .menus div {
+#right #API .doc .request .header div {
     border-bottom: 5px solid var(--border);
 }
-#right #API .doc .menus .empty {
+#right #API .doc .request .header .empty {
     width:15px;
 }
-#right #API .doc .menus .empty:last-child {
+#right #API .doc .request .header .empty:last-child {
     flex: 1;
 }
-#right #API .doc .menus div:not(.empty) {
+#right #API .doc .request .header div:not(.empty) {
     cursor: pointer;
     padding: 0px 10px;
 }
-#right #API .doc .menus .active {
+#right #API .doc .request .header div:not(.empty):hover {
+    color: var(--color-http);
+}
+#right #API .doc .request .header .active {
     border-bottom-color: var(--color-http);
-    font-weight: bold;
     color: white;
 }
-#right #API .doc .center .content > div {
-    display: none;
-}
-#right #API .doc .center .content .active {
+/* CONTAINER'S REQUEST */
+#right #API .doc .request .container {
+    flex: 1;
     display: flex;
     flex-direction: column;
+}
+#right #API .doc .request .container div:nth-child(n+0) {
+    flex: 1;
+    overflow: auto;
+}
+#right #API .doc .request .container > .active ~ .active {
+    border-top: solid 2px white;
 }
 #right #API .doc h3 {
     margin: 0;
     height: fit-content;
     margin-left: 15px;
 }
-#right #API .doc .controllersDescription_value {
+#right #API .doc .value {
     margin: 0;
     height: fit-content;
     margin-left: 30px;
     font-size: 12px;
 }
-#right #API .doc #bottom {
-    border-top: 2px solid var(--border);
-}
-#right #API .doc .center > div:not(.exception):not(.active) {
+#right #API .doc .request .container > div:not(.active) {
     display: none;
+}
+#right #API .doc .request .container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+#right #API .doc .request .container table tr {
+    border-bottom: 2px solid white;
+}
+#right #API .doc .request .container table th:not(:first-child) {
+    border-left: 2px solid white;
 }

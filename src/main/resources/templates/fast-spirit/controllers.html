@@ -14,33 +14,51 @@
     </div>
 </div>
 <div class="doc">
-    <div class="top">
-        <select class="httpMethods"></select>
-        <select class="paths"></select>
-        <div class="button">TRY IT</div>
-    </div>
-    <div class="menus">
-        <div class="empty"></div>
-        <div id="Description">Description</div>
-        <div id="Params">Params & Variables</div>
-        <div id="Headers">Headers</div>
-        <div id="Body">Body</div>
-        <div class="empty"></div>
-    </div>
-    <div class="center">
-        <div id="controllersDescription" link="Description">
-            <div class="description">
-                <h3>Description</h3>
+    <div class="request">
+        <div class="top">
+            <select class="httpMethods"></select>
+            <select class="paths"></select>
+            <div class="button">TRY IT</div>
+        </div>
+        <div class="header">
+            <div class="empty"></div>
+            <div id="Description">Description</div>
+            <div id="Params">Params & Variables</div>
+            <div id="Headers">Headers</div>
+            <div id="Body">Body</div>
+            <div id="Response">Response</div>
+            <div class="empty"></div>
+        </div>
+        <div class="container">
+            <div link="Description">
+                <div class="description">
+                    <h3>Description</h3>
+                    <p class="value"></p>
+                </div>
+                <div class="access">
+                    <h3>Access</h3>
+                    <div class="values"></div>
+                </div>
             </div>
-            <div class="access">
-                <h3>Access</h3>
+            <div link="Params">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>KEY</th>
+                        <th>TYPE</th>
+                        <th>VALUE</th>
+                        <th>DESCRIPTION</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div link="Headers"></div>
+            <div link="Body"></div>
+            <div link="Response">
+                <h3>Response</h3>
             </div>
         </div>
-        <div id="controllersParams" link="Params"></div>
-        <div id="controllersHeaders" link="Headers"></div>
-        <div id="controllersBody" link="Body"></div>
-        <div id="bottom" class="exception">
-            <h3>Response</h3>
-        </div>
+    </div>
+    <div class="documentation">
     </div>
 </div>

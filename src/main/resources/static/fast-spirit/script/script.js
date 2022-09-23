@@ -19,6 +19,11 @@ class FastSpirit {
             }
         }
         this.#Controller = new class {
+             #position = {
+                x: 0,
+                y: 0
+             }
+             #oneByOneHeader = false
              createMapping (controllers) {
                  document.querySelector("#right #API").innerHTML = controllers.html
 
@@ -30,7 +35,8 @@ class FastSpirit {
 
                  for (let mapping of document.querySelectorAll("#right #API .tree .controller .method")) mapping.addEventListener("click", () => this.changeMapping(mapping, controllers.controllers, 15))
 
-                 for (let menu of document.querySelectorAll("#right #API .doc .menus div:not(.empty)")) menu.addEventListener("click", () => this.menu = menu.id)
+                 if (this.#oneByOneHeader) for (let header of document.querySelectorAll("#right #API .doc .container .request .header div:not(.empty)")) header.addEventListener("click", () => this.header = { pointer: header.id, closeAll: true })
+                 else                      for (let header of document.querySelectorAll("#right #API .doc .request .header div:not(.empty)")) header.addEventListener("click", () => this.header = { pointer: header.id })
              }
              chevron (element) {
                  const children = element.parentElement.children
@@ -49,34 +55,54 @@ class FastSpirit {
                 const y = parseInt(element.attributes.y.value, 10)
                 const mapping = controllers[x].mappings[y]
 
+                if (this.#position.x === x && this.#position.y === y) return
+                this.#position = { x,y }
+
                 document.querySelectorAll("#header .empty")[0].innerHTML = mapping.title
 
-                this.header = ({
+                this.top = ({
                     mapping,
                     httpMethodSelect: document.querySelector("#right #API .doc .top .httpMethods"),
                     pathsSelect: document.querySelector("#right #API .doc .top .paths"),
                     doc: document.querySelector("#right #API .doc")
                 })
-                this.center = mapping
-                this.menu = null
+                this.container = mapping
+                this.header = { pointer: null, closeAll: true }
              }
              displayElement (element) {
                 if (element.style.display === '') element.style.display = 'none'
                 else element.style.display = ''
              }
-             // Afficher un menu
-             set menu (pointer) {
-                 // Si l'élément est null alors afficher le premier onglet pouvant être activer
-                 if (pointer == null) pointer = document.querySelectorAll("#right #API .doc .center > div:not(.inactive):not(.exception)")[0].getAttribute("link")
-                 // Afficher les bonnes colonnes au centre
-                 document.querySelectorAll("#right #API .doc .center > div:not(.inactive):not(.exception)").forEach(selection => selection.classList = [])
-                 document.querySelector(`#right #API .doc .center div[link="${pointer}"]`).classList = ['active']
-                 // Surligner le bon header
-                 document.querySelectorAll("#right #API .doc .menus > .active").forEach(selection => selection.classList = [])
-                 document.querySelector(`#right #API .doc .menus > #${pointer}`).classList = ["active"]
+             // Afficher un header
+             set header ({ pointer, closeAll = false }) {
+                 // Si l'élément est null alors afficher le premier onglet pouvant l'être activer
+                 if (pointer == null) pointer = document.querySelectorAll("#right #API .doc .request .container > div:not(.inactive)")[0].getAttribute("link")
+
+                 // Fermer tout les menus et enlever tout les surlignage si closeAll est vrai
+                 if (closeAll) {
+                    document.querySelectorAll("#right #API .doc .request .container > div:not(.inactive)").forEach(selection => selection.classList = [])
+                    document.querySelectorAll("#right #API .doc .request .header > .active").forEach(selection => selection.classList = [])
+                    // Afficher le container
+                    document.querySelector(`#right #API .doc .request .container > div[link=${pointer}]`).classList = ["active"]
+                    // Surligner le header
+                    document.querySelector(`#right #API .doc .request .header > #${pointer}`).classList = ["active"]
+                 }
+                 else {
+                    if (document.querySelector(`#right #API .doc .request .header > #${pointer}`).classList.value === 'active') {
+                        // Afficher le container
+                        document.querySelector(`#right #API .doc .request .container > div[link=${pointer}]`).classList = []
+                        // Surligner le header
+                        document.querySelector(`#right #API .doc .request .header > #${pointer}`).classList = []
+                    } else {
+                        // Enlever le container
+                        document.querySelector(`#right #API .doc .request .container > div[link=${pointer}]`).classList = ["active"]
+                        // Enlever le surlignement le header
+                        document.querySelector(`#right #API .doc .request .header > #${pointer}`).classList = ["active"]
+                    }
+                 }
              }
-             // Initialiser les headers
-             set header ({ mapping, httpMethodSelect, pathsSelect, doc }) {
+             // Initialiser le top
+             set top ({ mapping, httpMethodSelect, pathsSelect, doc }) {
                 // Vider les options pour les methods du doc et les ajouter
                 httpMethodSelect.replaceChildren()
                 httpMethodSelect.innerHTML = mapping.httpMethods
@@ -92,10 +118,12 @@ class FastSpirit {
                     .map(path => `<option value="${path}">${path}</option>`)
                     .join("")
              }
+             // Changer la couleur du doc
              set colorHttpMethod ({doc , value}) {
                 doc.className = 'doc ' + value
              }
-             set center (mapping) {
+             // Initialiser le container
+             set container (mapping) {
                  this.description = {
                      description : mapping.description,
                      access: mapping.accessApi
@@ -109,23 +137,30 @@ class FastSpirit {
                 element.style.display = "none"
                 element.classList = ["inactive"]
              }
+             set activeHeader (element) {
+                element.style.display = ""
+                element.classList = []
+             }
+             // Mettre a jour la description
              set description ({ description, access }) {
+                this.activeHeader = document.querySelector("#right #API .doc .request .container div[link=Description]")
+                document.querySelector("#right #API .doc .request .header #Description").style.display = ""
                 if (description === '' && access.length === 0) {
-                    document.querySelector("#right #API .doc .menus #Description").style.display = "none"
-                    this.inactiveHeader = document.querySelector("#right #API .doc .center #controllersDescription")
+                    document.querySelector("#right #API .doc .request .header #Description").style.display = "none"
+                    this.inactiveHeader = document.querySelector("#right #API .doc .request .container div[link=Description]")
                 } else if (description === '') {
-                    document.querySelector("#right #API .doc .center #controllersDescription .description").style.display = "none"
-                    document.querySelector("#right #API .doc .center #controllersDescription .access").innerHTML += access
-                        .map(value => `<p class="controllersDescription_value">${value}</p>`)
+                    document.querySelector("#right #API .doc .request .container div[link=Description] .description").style.display = "none"
+                    document.querySelector("#right #API .doc .request .container div[link=Description] .access .values").innerHTML = access
+                        .map(value => `<p class="value">${value}</p>`)
                         .join("")
                 } else if (access.length === 0) {
-                    document.querySelector("#right #API .doc .center #controllersDescription .access").style.display = "none"
-                    document.querySelector("#right #API .doc .center  #controllersDescription .description").innerHTML += `<p class="controllersDescription_value">${description}</p>`
+                    document.querySelector("#right #API .doc .request .container div[link=Description] .access").style.display = "none"
+                    document.querySelector("#right #API .doc .request .container div[link=Description] .description .value").innerHTML = `${description}`
                 } else {
-                    document.querySelector("#right #API .doc .center #controllersDescription .access").innerHTML += access
-                        .map(value => `<p class="controllersDescription_value">${value}</p>`)
+                    document.querySelector("#right #API .doc .request .container div[link=Description] .access .values").innerHTML = access
+                        .map(value => `<p class="value">${value}</p>`)
                         .join("")
-                    document.querySelector("#right #API .doc .center  #controllersDescription .description").innerHTML += `<p class="controllersDescription_value">${description}</p>`
+                    document.querySelector("#right #API .doc .request .container div[link=Description] .description .value").innerHTML = `${description}`
                 }
              }
              set parameters ({parameters, variables}) {
